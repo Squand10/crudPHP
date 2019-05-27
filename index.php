@@ -2,6 +2,7 @@
 
 include_once 'connexion.php';
 
+
 $connect = connectDB();
 
 $sql_select = "SELECT id, tache, nom, date, status  FROM todolist";
@@ -51,6 +52,13 @@ mysqli_close($connect);
             echo "<li class='list-group-item'>Tâche : $row[1], ajouté par :  $row[2] le $row[3] statut : $row[4].<a id='$row[0]' href=\"index.php?delete=$row[0]\" type=\"submit\" class=\"btn btn-primary\">X</a></li>";
         }
         ?>
+            <?php if (isset ($_GET['error'])){
+                ?>
+            <p style='color:red'>ERREUR<p>
+       <?php } elseif (isset ($_GET['success']) ){
+                ?>
+                <p style='color:green'>Votre tâche a été ajoutée<p>
+       <?php } ?>
         </ul>
     </div>
     </body>
